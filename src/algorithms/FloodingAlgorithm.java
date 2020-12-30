@@ -12,11 +12,19 @@ import java.util.stream.Collectors;
 public class FloodingAlgorithm extends Algorithm {
 
     // IMPORTANT: You can maintain a state, e.g., a flag.
-
+    private boolean state = false;
     @Override
     public List<NeighborInfo> selectNeighbors(String origin, String destination, String previousHop,
                                               List<NeighborInfo> neighbors) {
-        // Your code goes here.
+        if (!state) {
+            state = true;
+            List<NeighborInfo> chosen = neighbors.stream()
+                    // Make sure that we do not route back to the previous hop.
+                    .filter(n -> !n.address.equals(previousHop))
+                    .collect(Collectors.toList());
+            // Return the chosen nodes.
+            return chosen;
+        }
         return new ArrayList<>();
     }
 
