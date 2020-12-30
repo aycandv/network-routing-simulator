@@ -65,7 +65,7 @@ public class Simulator {
     }
 
     public void destinationReached(Packet pkt) {
-        this.finalPacket = pkt.copy();
+        if(finalPacket == null) finalPacket = pkt.copy();
     }
 
     public void run(Packet pkt) {
